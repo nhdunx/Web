@@ -5,225 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dũng Nguyễn Profile</title>
     
-    <meta name="description" content="Dũng Nguyễn Profile - Full Stack Developer. Chia sẻ kiến thức, mã nguồn và các dự án cá nhân.">
-    <meta name="author" content="Dũng Nguyễn">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dunx.id.vn/">
-    <meta property="og:title" content="Dũng Nguyễn Profile">
-    <meta property="og:description" content="Full Stack Developer | No pains, no gains. Ghé thăm profile của tôi để xem thêm các dự án.">
-    <meta property="og:image" content="https://i.pinimg.com/736x/f5/21/36/f52136794653a62445a32620c2b76584.jpg">
-    <link rel="icon" href="https://i.pinimg.com/736x/f5/21/36/f52136794653a62445a32620c2b76584.jpg" type="image/x-icon">
+    <meta name="description" content="Dũng Đại Ka - Chẳng có cái con cẹc gì cả">
+    <meta property="og:image" content="https://sv2.anhsieuviet.com/2025/09/07/gai-vu-to-10.jpg">
+    <link rel="icon" href="https://sv2.anhsieuviet.com/2025/09/07/gai-vu-to-10.jpg" type="image/x-icon">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CẤU HÌNH MÀU SẮC --- */
+        /* --- CẤU HÌNH (Mặc định là Dark Mode theo ảnh) --- */
         :root {
-            /* Light Mode */
-            --bg-gradient: url('https://sv2.anhsieuviet.com/2025/12/06/1icnnoa4bts61.png') no-repeat center center/cover;
-            --card-bg: rgba(255, 255, 255, 0.75); /* Tăng độ đục một chút cho dễ đọc trên mobile */
-            --text-main: #333;
-            --text-sub: #555;
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            --border: 1px solid rgba(255, 255, 255, 0.4);
-            --switch-bg: #cbd5e0;
-        }
-
-        [data-theme="dark"] {
-            /* Dark Mode */
-            --bg-gradient: url('https://i.ibb.co/GQ5YSH48/immortalized-legend-ahri-skin-splash-art-lol-2k-wallpaper-uhdpaper-com-547-0-j.jpg') no-repeat center center/cover;
-            --card-bg: rgba(0, 0, 0, 0.6);
+            --bg-image: url('https://i.ibb.co/GQ5YSH48/immortalized-legend-ahri-skin-splash-art-lol-2k-wallpaper-uhdpaper-com-547-0-j.jpg');
+            --card-bg: rgba(20, 20, 20, 0.85); /* Màu đen mờ đậm hơn */
             --text-main: #fff;
-            --text-sub: #ddd;
-            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
-            --border: 1px solid rgba(255, 255, 255, 0.1);
-            --switch-bg: #4a5568;
+            --text-sub: #aaa;
+            --highlight: #ff7e5f; /* Màu cam của tên */
+            --border: 1px solid rgba(255, 255, 255, 0.15);
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         /* --- CSS CHUNG --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         
         body {
-            background: var(--bg-gradient);
-            background-attachment: fixed; /* Cố định nền */
+            background: var(--bg-image) no-repeat center center/cover;
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Để flex-start để không bị lỗi scroll trên mobile */
+            align-items: flex-start; /* Để start để scroll được trên mobile */
             color: var(--text-main);
-            overflow-x: hidden;
-            position: relative;
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding: 20px 10px; /* Padding nhỏ cho mobile */
         }
 
-        /* --- SNOW EFFECT --- */
-        .snowflake {
-            position: absolute; top: -50px; color: rgba(255, 255, 255, 0.9); z-index: 1; pointer-events: none;
-            animation: snowfall linear infinite; text-shadow: 0 0 5px rgba(255,255,255,0.8);
-        }
-        @keyframes snowfall {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-            50% { transform: translate(20px, 50vh) rotate(180deg); }
-            100% { transform: translate(-20px, 110vh) rotate(360deg); opacity: 0.2; }
-        }
+        /* Hiệu ứng tuyết rơi nhẹ */
+        .snowflake { position: absolute; color: #fff; pointer-events: none; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(100vh); opacity: 0; } }
 
-        /* --- LAYOUT CHÍNH --- */
         .container {
-            width: 95%;
-            max-width: 1100px; /* Rộng hơn chút cho PC */
-            z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            z-index: 2;
         }
 
-        /* --- HEADER PROFILE --- */
+        /* --- HEADER (AVATAR & INFO) --- */
         .header-profile {
             display: flex;
-            flex-wrap: wrap; /* Cho phép xuống dòng */
-            gap: 30px;
-            margin-bottom: 30px;
-            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        /* Card Avatar */
-        .profile-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px; padding: 20px;
-            border: var(--border); box-shadow: var(--shadow);
-            width: 320px; /* Cố định chiều rộng trên PC */
-            text-align: center;
-            flex-shrink: 0; /* Không cho co lại */
-        }
-
-        .avatar-frame {
-            width: 100%; aspect-ratio: 1/1; /* Vuông */
-            border-radius: 15px; overflow: hidden;
-            margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.3);
-        }
-        .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        .info-list { list-style: none; text-align: left; font-size: 0.95rem; color: var(--text-sub); }
-        .info-list li { margin: 10px 0; display: flex; align-items: center; gap: 10px; }
-
-        /* Content bên phải */
-        .profile-content {
-            flex: 1; /* Chiếm phần còn lại */
-            background: var(--card-bg); /* Thêm nền mờ cho phần content luôn cho dễ đọc */
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 30px;
-            border-radius: 20px;
-            border: var(--border);
-            box-shadow: var(--shadow);
+        /* Card Avatar (Bên trái) */
+        .card-avatar {
+            flex: 1;
             min-width: 300px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .hello-text { font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; line-height: 1.2; }
-        .name-highlight { 
-            background: linear-gradient(90deg, #ff6b6b, #feca57); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        .avatar-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .role { font-size: 1.1rem; margin-bottom: 10px; }
-        .tag { background: #3498db; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-        .quote { font-style: italic; color: var(--text-sub); margin-bottom: 25px; display: block; border-left: 3px solid #3498db; padding-left: 10px; }
+        .info-list { list-style: none; font-size: 0.9rem; color: var(--text-sub); }
+        .info-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .info-list i { width: 20px; text-align: center; color: #ccc; }
+
+        /* Card Hello (Bên phải) */
+        .card-hello {
+            flex: 1.5;
+            min-width: 300px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .hello-title { font-size: 2rem; font-weight: 800; line-height: 1.2; }
+        .name-highlight { color: var(--highlight); }
         
-        /* Actions */
-        .actions { display: flex; gap: 10px; align-items: center; margin-bottom: 25px; flex-wrap: wrap; }
+        .role { margin: 10px 0; font-size: 0.95rem; }
+        .tag { background: #3498db; color: #fff; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+        
+        .quote { display: block; font-style: italic; color: var(--text-sub); border-left: 3px solid #ff4757; padding-left: 10px; margin-bottom: 20px; font-size: 0.9rem; }
+
+        /* Nút Social + Switch */
+        .action-row { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
         .btn-social {
-            width: 45px; height: 45px; border-radius: 10px;
-            background: rgba(255,255,255,0.5); border: var(--border);
-            display: flex; justify-content: center; align-items: center;
-            color: var(--text-main); font-size: 1.3rem; text-decoration: none;
-            transition: 0.3s;
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1);
+            border-radius: 10px; display: flex; justify-content: center; align-items: center;
+            color: #fff; text-decoration: none; transition: 0.2s; border: 1px solid rgba(255,255,255,0.1);
         }
-        .btn-social:hover { transform: translateY(-3px); background: #3498db; color: white; border-color: #3498db; }
+        .btn-social:hover { background: var(--highlight); border-color: var(--highlight); }
 
-        /* Theme Switch */
+        /* Switch gạt */
         .theme-switch {
-            position: relative; width: 60px; height: 30px; background: var(--switch-bg);
-            border-radius: 30px; cursor: pointer; margin-left: auto; /* Đẩy sang phải cùng */
-            transition: background 0.4s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            width: 50px; height: 28px; background: #4a5568; border-radius: 20px;
+            position: relative; cursor: pointer; margin-left: auto; /* Đẩy sang phải cùng */
         }
-        .theme-switch::before {
-            content: '☀️'; position: absolute; top: 3px; left: 3px;
-            width: 24px; height: 24px; background: #fff; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        .theme-switch::after {
+            content: '🌙'; position: absolute; top: 2px; left: 24px;
+            width: 24px; height: 24px; background: #2d3748; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 12px;
+            transition: 0.3s; color: #f1c40f;
         }
-        [data-theme="dark"] .theme-switch::before {
-            content: '🌙'; transform: translateX(30px) rotate(360deg);
-            background: #2d3748; color: #f6e05e;
+        /* Style cho GitHub Grid */
+        .git-grid { display: flex; gap: 3px; flex-wrap: wrap; opacity: 0.7; margin-top: auto; }
+        .pixel { width: 10px; height: 10px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+        .pixel.green1 { background: #0e4429; }
+        .pixel.green2 { background: #006d32; }
+        .pixel.green3 { background: #26a641; }
+        .pixel.green4 { background: #39d353; }
+
+        /* --- LINK SECTIONS (Quan trọng: 2 Cột) --- */
+        .section-header { 
+            font-size: 1.2rem; font-weight: 700; margin: 25px 0 15px; 
+            display: flex; align-items: center; gap: 8px; 
         }
 
-        /* Contribution Grid */
-        .contribution-board {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(10px, 1fr)); /* Auto fit */
-            gap: 4px; margin-top: 20px; opacity: 0.8;
-            height: 80px; overflow: hidden;
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Luôn chia 2 cột */
+            gap: 12px; /* Khoảng cách giữa các ô */
         }
-        .pixel { width: 100%; height: 100%; background: rgba(255,255,255,0.2); border-radius: 2px; }
-        .pixel.active-1 { background: #9be9a8; }
-        .pixel.active-2 { background: #40c463; }
-        .pixel.active-3 { background: #30a14e; }
-        .pixel.active-4 { background: #216e39; }
-        .pixel.purple { background: #8e44ad; }
 
-        /* --- PROJECT GRID --- */
-        .section-title { font-size: 1.5rem; margin: 30px 0 15px; display: flex; align-items: center; gap: 10px; color: var(--text-main); font-weight: bold; text-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .link-card {
+            background: #000000; /* Nền đen đậm theo ảnh */
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
         
-        .grid-cards {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Tự động chia cột */
-            gap: 20px;
+        /* Hiệu ứng gradient mờ mờ bên dưới giống ảnh */
+        .link-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 0;
         }
-        .card-link { text-decoration: none; color: inherit; display: block; }
 
-        .project-card {
-            background: var(--card-bg); backdrop-filter: blur(10px); border: var(--border);
-            padding: 20px; border-radius: 15px; box-shadow: var(--shadow);
-            cursor: pointer; height: 100%; display: flex; flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .link-card:active { transform: scale(0.98); }
+
+        .card-top { 
+            display: flex; justify-content: space-between; align-items: flex-start; 
+            position: relative; z-index: 1; margin-bottom: 5px;
         }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         
-        .card-header { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center; }
-        .card-title { font-weight: bold; font-size: 1.1rem; }
-        .card-icon { font-size: 1.8rem; }
-        .card-desc { font-size: 0.9rem; color: var(--text-sub); line-height: 1.5; }
+        .card-title { font-weight: bold; font-size: 0.95rem; line-height: 1.3; max-width: 80%; }
+        .card-icon { font-size: 1.2rem; } /* Icon bên phải */
 
-        /* =========================================
-           MOBILE RESPONSIVE (QUAN TRỌNG)
-           ========================================= */
-        @media (max-width: 900px) {
-            .header-profile {
-                flex-direction: column; /* Xếp dọc trên tablet/mobile */
-                align-items: center;
-            }
-            .profile-card { width: 100%; max-width: 400px; } /* Avatar full width nhưng không quá to */
-            .profile-content { width: 100%; text-align: center; }
-            .theme-switch { margin: 0 auto; /* Ra giữa trên mobile */ }
-            .actions { justify-content: center; }
-            .quote { text-align: center; border-left: none; border-top: 3px solid #3498db; padding-top: 10px; }
-            .contribution-board { display: none; /* Ẩn git grid trên mobile cho đỡ rối */ }
+        .card-desc { 
+            font-size: 0.75rem; color: #bbb; position: relative; z-index: 1; 
+            margin-top: auto; /* Đẩy xuống đáy */
+        }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 768px) {
+            .header-profile { flex-direction: column; }
+            .card-avatar, .card-hello { min-width: 100%; }
             
-            .grid-cards { grid-template-columns: 1fr; /* 1 cột trên mobile */ }
-        }
-
-        @media (max-width: 480px) {
-            .hello-text { font-size: 1.8rem; } /* Giảm cỡ chữ tiêu đề */
-            .container { padding: 10px; width: 100%; }
-            .profile-content { padding: 20px; }
-            .btn-social { width: 40px; height: 40px; font-size: 1.1rem; }
+            /* Giữ nguyên 2 cột trên mobile nhưng giảm font chữ nếu cần */
+            .grid-2-col { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .card-title { font-size: 0.9rem; }
+            .card-desc { font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
 
+    <div id="snow-container"></div>
+
     <div class="container">
-        <header class="header-profile">
-            <div class="profile-card">
-                <div class="avatar-frame">
-                    <img src="https://sv2.anhsieuviet.com/2025/09/07/gai-vu-to-10.jpg" alt="Avatar">
-                </div>
+        <div class="header-profile">
+            <div class="card-avatar">
+                <img src="https://sv2.anhsieuviet.com/2025/09/07/gai-vu-to-10.jpg" alt="Avatar" class="avatar-img">
                 <ul class="info-list">
                     <li><i class="fas fa-map-marker-alt"></i> Form Ha Noi City</li>
                     <li><i class="fas fa-heart"></i> Độc toàn thân</li>
@@ -232,142 +209,105 @@
                 </ul>
             </div>
 
-            <div class="profile-content">
-                <h1 class="hello-text">Hello, I'm <br><span class="name-highlight">Ng Dung</span></h1>
+            <div class="card-hello">
+                <div class="hello-title">Hello, I'm <br><span class="name-highlight">Ng Dung</span></div>
                 <div class="role">
-                    👨‍💻 <span class="tag">Full Time</span> Scamer
+                    <i class="fas fa-user-tie"></i> <span class="tag">Full Time</span> Scamer
                 </div>
-                <span class="quote">⛽ Hack lỏ số một của Mỹ (Đình).</span>
+                <span class="quote">Hack lỏ số một của Mỹ (Đình).</span>
 
-                <div class="actions">
-                    <a href="https://www.facebook.com/dec09.zunq" target="_blank" class="btn-social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://github.com/nhdunx" target="_blank" class="btn-social"><i class="fab fa-github"></i></a>
-                    <a href="https://www.tiktok.com/wish4.love" target="_blank" class="btn-social"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.youtube.com/dunxaov" target="_blank" class="btn-social"><i class="fab fa-youtube"></i></a>
-                    
-                    <div class="theme-switch" onclick="toggleTheme()" title="Chuyển chế độ Sáng/Tối"></div>
+                <div class="action-row">
+                    <a href="https://facebook.com" target="_blank" class="btn-social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://github.com" target="_blank" class="btn-social"><i class="fab fa-github"></i></a>
+                    <a href="https://tiktok.com" target="_blank" class="btn-social"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="btn-social"><i class="fab fa-youtube"></i></a>
+                    <div class="theme-switch"></div>
                 </div>
 
-                <div class="contribution-board" id="contributionGrid"></div>
+                <div class="git-grid" id="gitGrid"></div>
             </div>
-        </header>
+        </div>
 
-        <h2 class="section-title"><i class="fas fa-link"></i> Thông tin</h2>
-        <div class="grid-cards">
-            <a href="https://t.me/nhdunx" target="_blank" class="card-link">
-                <div class="project-card">
-                    <div class="card-header">
-                        <span class="card-title">Kênh Thông Báo</span>
-                        <span class="card-icon" style="color: #3498db;">🤖</span>
-                    </div>
-                    <p class="card-desc">Thông báo mỗi khi có hack map free mới</p>
+        <div class="section-header"><i class="fas fa-link"></i> Thông tin</div>
+        <div class="grid-2-col">
+            <a href="https://t.me/nhdunx" target="_blank" class="link-card">
+                <div class="card-top">
+                    <div class="card-title">Kênh Thông Báo</div>
+                    <div class="card-icon">🤖</div>
                 </div>
+                <div class="card-desc">Thông báo mỗi khi có hack map free mới</div>
             </a>
 
-            <a href="https://t.me/dunxaov" target="_blank" class="card-link">
-                <div class="project-card">
-                    <div class="card-header">
-                        <span class="card-title">Nhóm Tê Lê</span>
-                        <span class="card-icon" style="color: #2ecc71;">😎</span>
-                    </div>
-                    <p class="card-desc">Giao lưu võ mồm chửi nhau và feedback</p>
+            <a href="https://t.me/dunxaov" target="_blank" class="link-card">
+                <div class="card-top">
+                    <div class="card-title">Nhóm Tê Lê</div>
+                    <div class="card-icon">😎</div>
                 </div>
+                <div class="card-desc">Giao lưu võ mồm chửi nhau và feedback</div>
             </a>
 
-            <a href="https://t.me/sadboizm" target="_blank" class="card-link">
-                <div class="project-card">
-                    <div class="card-header">
-                        <span class="card-title">My Telegram</span>
-                        <span class="card-icon" style="color: #9b59b6;">👽</span>
-                    </div>
-                    <p class="card-desc">Cần liên hệ vào nhóm hack kín thì ib "Rep lo hay alo = block"</p>
+            <a href="https://t.me/sadboizm" target="_blank" class="link-card">
+                <div class="card-top">
+                    <div class="card-title">My Telegram</div>
+                    <div class="card-icon">👽</div>
                 </div>
+                <div class="card-desc">Cần liên hệ vào nhóm hack kín thì ib</div>
             </a>
 
-            <a href="https://zalo.me/0987071831" target="_blank" class="card-link">
-                <div class="project-card">
-                    <div class="card-header">
-                        <span class="card-title">My Zalo</span>
-                        <span class="card-icon" style="color: #e67e22;">💩</span>
-                    </div>
-                    <p class="card-desc">Mua chứng chỉ cá nhân IOS thì In bốc qua đây</p>
+            <a href="https://zalo.me/0987071831" target="_blank" class="link-card">
+                <div class="card-top">
+                    <div class="card-title">My Zalo</div>
+                    <div class="card-icon">💩</div>
                 </div>
+                <div class="card-desc">Mua chứng chỉ cá nhân IOS thì In bốc</div>
             </a>
         </div>
 
-        <h2 class="section-title"><i class="far fa-copy"></i> Mục Khác</h2>
-        <div class="grid-cards">
-            <a href="https://bio.link/zunq" target="_blank" class="card-link">
-                <div class="project-card">
-                    <div class="card-header">
-                        <span class="card-title">Bio Link</span>
-                        <span class="card-icon" style="color: #e74c3c;">💀</span>
-                    </div>
-                    <p class="card-desc">Có hướng dẫn và File cài trực tiếp</p>
+        <div class="section-header"><i class="far fa-copy"></i> Mục Khác</div>
+        <div class="grid-2-col">
+            <a href="https://bio.link/zunq" target="_blank" class="link-card">
+                <div class="card-top">
+                    <div class="card-title">Bio Link</div>
+                    <div class="card-icon">💀</div>
                 </div>
+                <div class="card-desc">Có hướng dẫn và File cài trực tiếp</div>
             </a>
 
-            <a href="https://drive.google.com/drive/folders/119TEfhXhXTQnARsMwesNUYy5iHprAFpm?usp=drive_link" target="_blank" class="card-link">
-                <div class="project-card">
-                    <div class="card-header">
-                        <span class="card-title">Driver</span>
-                        <span class="card-icon" style="color: #f1c40f;">👻</span>
-                    </div>
-                    <p class="card-desc">Thư viện IPA Free</p>
+            <a href="#" target="_blank" class="link-card">
+                <div class="card-top">
+                    <div class="card-title">Driver</div>
+                    <div class="card-icon">👻</div>
                 </div>
+                <div class="card-desc">Thư viện IPA Free</div>
             </a>
         </div>
     </div>
 
     <script>
-        // --- 1. XỬ LÝ THEME ---
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.setAttribute('data-theme', 'dark');
+        // JS Tạo GitHub Grid giả
+        const grid = document.getElementById('gitGrid');
+        for(let i=0; i<66; i++) {
+            let div = document.createElement('div');
+            div.className = 'pixel';
+            let r = Math.random();
+            if(r > 0.8) div.classList.add('green4');
+            else if(r > 0.6) div.classList.add('green3');
+            else if(r > 0.4) div.classList.add('green2');
+            else div.classList.add('green1');
+            grid.appendChild(div);
         }
 
-        // --- 2. CONTRIBUTION GRID (FAKE) ---
-        const grid = document.getElementById('contributionGrid');
-        if (grid) {
-            // Tạo 70 ô thôi cho vừa đẹp
-            for (let i = 0; i < 70; i++) {
-                const div = document.createElement('div');
-                div.classList.add('pixel');
-                const rand = Math.random();
-                if (rand > 0.85) div.classList.add('active-4');
-                else if (rand > 0.65) div.classList.add('active-3');
-                else if (rand > 0.45) div.classList.add('active-2');
-                else if (rand > 0.25) div.classList.add('active-1');
-                else if (rand > 0.20) div.classList.add('purple'); 
-                grid.appendChild(div);
-            }
-        }
-
-        // --- 3. SNOWFALL ---
-        function createSnowflake() {
+        // JS Tạo tuyết rơi
+        setInterval(() => {
             const snow = document.createElement('div');
-            snow.classList.add('snowflake');
+            snow.className = 'snowflake';
             snow.innerText = '❄️';
             snow.style.left = Math.random() * 100 + 'vw';
-            const size = Math.random() * 15 + 8 + 'px'; 
-            snow.style.fontSize = size;
-            snow.style.opacity = Math.random() * 0.7 + 0.3;
-            const duration = Math.random() * 5 + 5 + 's'; 
-            snow.style.animationDuration = duration;
+            snow.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snow.style.animationDuration = Math.random() * 3 + 2 + 's'; 
             document.body.appendChild(snow);
-            setTimeout(() => { snow.remove(); }, parseFloat(duration) * 1000);
-        }
-        setInterval(createSnowflake, 200);
+            setTimeout(() => snow.remove(), 5000);
+        }, 300);
     </script>
 </body>
 </html>
